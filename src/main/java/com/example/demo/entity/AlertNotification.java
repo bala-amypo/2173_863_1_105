@@ -39,18 +39,38 @@ public class AlertNotification {
         this.alertMessage = alertMessage;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() { 
+        return id; 
+    }
+    public void setId(Long id) {
+     this.id = id; 
+     }
 
-    public VisitLog getVisitLog() { return visitLog; }
-    public void setVisitLog(VisitLog visitLog) { this.visitLog = visitLog; }
+    public VisitLog getVisitLog() { 
+    return visitLog; 
+    }
+    public void setVisitLog(VisitLog visitLog) { 
+        this.visitLog = visitLog; 
+    }
 
-    public String getSentTo() { return sentTo; }
-    public void setSentTo(String sentTo) { this.sentTo = sentTo; }
+    public String getSentTo() {
+         return sentTo; 
+    }
+    public void setSentTo(String sentTo) {
+         this.sentTo = sentTo; 
+    }
 
-    public String getAlertMessage() { return alertMessage; }
-    public void setAlertMessage(String alertMessage) { this.alertMessage = alertMessage; }
+    public String getAlertMessage() {
+         return alertMessage; 
+    }
+    public void setAlertMessage(String alertMessage){
+         this.alertMessage = alertMessage; 
+    }
 
-    public LocalDateTime getSentAt() { return sentAt; }
-    public void setSentAt(LocalDateTime sentAt) { this.sentAt = sentAt; }
+    public LocalDateTime getSentAt() {
+     return sentAt; 
+     }
+    public void setSentAt(LocalDateTime sentAt) {
+         this.sentAt = sentAt; 
+         }
 }
