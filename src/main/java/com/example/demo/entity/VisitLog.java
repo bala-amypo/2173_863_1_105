@@ -47,6 +47,7 @@ public class VisitLog {
         }
     }
 
+
     public VisitLog() {}
 
     public VisitLog(Visitor visitor, Host host, String purpose) {

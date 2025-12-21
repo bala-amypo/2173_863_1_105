@@ -44,7 +44,6 @@ public class Host {
         createdAt = LocalDateTime.now();
     }
 
-   
     public Host() {}
 
     public Host(String hostName, String fullname, String email, String department, String phone) {
@@ -55,7 +54,6 @@ public class Host {
         this.phone = phone;
     }
 
-  
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -26,7 +26,6 @@ public class Appointment {
     @Column(nullable = false)
     private String status = "SCHEDULED";
 
- 
     public Appointment() {}
 
     public Appointment(Visitor visitor, Host host, LocalDate appointmentDate, String purpose) {
@@ -37,7 +36,6 @@ public class Appointment {
         this.status = "SCHEDULED";
     }
 
-   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
