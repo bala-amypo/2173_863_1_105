@@ -31,7 +31,6 @@ public class AlertNotification {
         sentAt = LocalDateTime.now();
     }
 
-  
     public AlertNotification() {}
 
     public AlertNotification(VisitLog visitLog, String sentTo, String alertMessage) {
@@ -40,7 +39,6 @@ public class AlertNotification {
         this.alertMessage = alertMessage;
     }
 
-    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

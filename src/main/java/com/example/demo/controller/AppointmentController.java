@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
 import com.example.demo.entity.Appointment;
 import com.example.demo.service.AppointmentService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/appointments")
 @Tag(name = "Appointments", description = "Appointment scheduling")
-@SecurityRequirement(name = "Bearer Authentication")
 public class AppointmentController {
     
     private final AppointmentService appointmentService;
@@ -25,12 +22,11 @@ public class AppointmentController {
 
     @PostMapping("/{visitorId}/{hostId}")
     @Operation(summary = "Create a new appointment")
-    public ResponseEntity<ApiResponse> createAppointment(@PathVariable Long visitorId, 
+    public ResponseEntity<Appointment> createAppointment(@PathVariable Long visitorId, 
                                                        @PathVariable Long hostId,
                                                        @RequestBody Appointment appointment) {
         Appointment createdAppointment = appointmentService.createAppointment(visitorId, hostId, appointment);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ApiResponse(true, "Appointment created successfully", createdAppointment));
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
 
     @GetMapping("/host/{hostId}")

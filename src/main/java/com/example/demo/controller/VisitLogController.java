@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
 import com.example.demo.entity.VisitLog;
 import com.example.demo.service.VisitLogService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/visits")
 @Tag(name = "Visit Logs", description = "Check-in and check-out operations")
-@SecurityRequirement(name = "Bearer Authentication")
 public class VisitLogController {
     
     private final VisitLogService visitLogService;
@@ -26,20 +23,19 @@ public class VisitLogController {
 
     @PostMapping("/checkin/{visitorId}/{hostId}")
     @Operation(summary = "Check in visitor")
-    public ResponseEntity<ApiResponse> checkInVisitor(@PathVariable Long visitorId, 
+    public ResponseEntity<VisitLog> checkInVisitor(@PathVariable Long visitorId, 
                                                     @PathVariable Long hostId,
                                                     @RequestBody Map<String, String> request) {
         String purpose = request.get("purpose");
         VisitLog visitLog = visitLogService.checkInVisitor(visitorId, hostId, purpose);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ApiResponse(true, "Visitor checked in successfully", visitLog));
+        return ResponseEntity.status(HttpStatus.CREATED).body(visitLog);
     }
 
     @PostMapping("/checkout/{visitLogId}")
     @Operation(summary = "Check out visitor")
-    public ResponseEntity<ApiResponse> checkOutVisitor(@PathVariable Long visitLogId) {
+    public ResponseEntity<VisitLog> checkOutVisitor(@PathVariable Long visitLogId) {
         VisitLog visitLog = visitLogService.checkOutVisitor(visitLogId);
-        return ResponseEntity.ok(new ApiResponse(true, "Visitor checked out successfully", visitLog));
+        return ResponseEntity.ok(visitLog);
     }
 
     @GetMapping("/active")

@@ -1,10 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
 import com.example.demo.entity.Visitor;
 import com.example.demo.service.VisitorService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/visitors")
 @Tag(name = "Visitors", description = "Visitor management endpoints")
-@SecurityRequirement(name = "Bearer Authentication")
 public class VisitorController {
     
     private final VisitorService visitorService;
@@ -25,10 +22,9 @@ public class VisitorController {
 
     @PostMapping
     @Operation(summary = "Create a new visitor")
-    public ResponseEntity<ApiResponse> createVisitor(@RequestBody Visitor visitor) {
+    public ResponseEntity<Visitor> createVisitor(@RequestBody Visitor visitor) {
         Visitor createdVisitor = visitorService.createVisitor(visitor);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ApiResponse(true, "Visitor created successfully", createdVisitor));
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdVisitor);
     }
 
     @GetMapping
