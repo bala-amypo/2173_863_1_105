@@ -85,7 +85,7 @@ public class Visitor {
     }
 
     public String getIdProofNumber(){
-         return idProofNumber; \
+         return idProofNumber; 
     }
     public void setIdProofNumber(String idProofNumber){
          this.idProofNumber = idProofNumber; 
