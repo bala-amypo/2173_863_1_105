@@ -104,6 +104,9 @@ public class Visitor {
     }
 
     public List<VisitLog> getVisitLogs(){
-         return visitLogs; }
-    public void setVisitLogs(List<VisitLog> visitLogs) { this.visitLogs = visitLogs; }
+         return visitLogs; 
+    }
+    public void setVisitLogs(List<VisitLog> visitLogs){
+         this.visitLogs = visitLogs; 
+    }
 }
