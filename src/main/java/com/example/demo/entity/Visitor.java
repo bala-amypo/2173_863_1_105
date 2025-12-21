@@ -43,7 +43,7 @@ public class Visitor {
         createdAt = LocalDateTime.now();
     }
 
-    public Visitor() {}
+    public Visitor(){}
 
     public Visitor(String fullName, String email, String phone, String idProofNumber) {
         this.fullName = fullName;
