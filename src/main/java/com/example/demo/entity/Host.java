@@ -96,12 +96,24 @@ public class Host {
          this.phone = phone; 
     }
 
-    public LocalDateTime getCreatedAt(){ return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public LocalDateTime getCreatedAt(){
+         return createdAt; 
+    }
+    public void setCreatedAt(LocalDateTime createdAt){
+         this.createdAt = createdAt; 
+    }
 
-    public List<Appointment> getAppointments() { return appointments; }
-    public void setAppointments(List<Appointment> appointments) { this.appointments = appointments; }
+    public List<Appointment> getAppointments(){
+         return appointments; 
+    }
+    public void setAppointments(List<Appointment> appointments){
+         this.appointments = appointments; 
+    }
 
-    public List<VisitLog> getVisitLogs() { return visitLogs; }
-    public void setVisitLogs(List<VisitLog> visitLogs) { this.visitLogs = visitLogs; }
+    public List<VisitLog> getVisitLogs(){
+         return visitLogs; 
+    }
+    public void setVisitLogs(List<VisitLog> visitLogs){
+         this.visitLogs = visitLogs; 
+    }
 }

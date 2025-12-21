@@ -48,7 +48,9 @@ public class VisitLog {
     }
 
 
-    public VisitLog() {}
+    public VisitLog(){
+
+    }
 
     public VisitLog(Visitor visitor, Host host, String purpose) {
         this.visitor = visitor;
@@ -58,7 +60,9 @@ public class VisitLog {
         this.alertSent = false;
     }
 
-    public Long getId() { return id; }
+    public Long getId(){
+     return id; 
+     }
     public void setId(Long id) { this.id = id; }
 
     public Visitor getVisitor() { return visitor; }
