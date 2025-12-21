@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +32,8 @@ public class Visitor {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "visitor", cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
