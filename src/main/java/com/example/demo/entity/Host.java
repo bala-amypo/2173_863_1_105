@@ -40,13 +40,13 @@ public class Host {
     private List<VisitLog> visitLogs;
 
     @PrePersist
-    protected void onCreate() {
+    protected void onCreate(){
         createdAt = LocalDateTime.now();
     }
 
-    public Host() {}
+    public Host(){}
 
-    public Host(String hostName, String fullname, String email, String department, String phone) {
+    public Host(String hostName, String fullname, String email, String department, String phone){
         this.hostName = hostName;
         this.fullname = fullname;
         this.email = email;
@@ -54,8 +54,12 @@ public class Host {
         this.phone = phone;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId(){
+         return id; 
+    }
+    public void setId(Long id){ 
+       this.id = id; 
+    }
 
     public String getHostName() { return hostName; }
     public void setHostName(String hostName) { this.hostName = hostName; }

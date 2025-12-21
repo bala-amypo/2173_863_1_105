@@ -36,42 +36,42 @@ public class Appointment{
         this.status = "SCHEDULED";
     }
 
-    public Long getId() {
+    public Long getId(){
          return id; 
          }
-    public void setId(Long id) {
+    public void setId(Long id){
      this.id = id; 
      }
 
-    public Visitor getVisitor() {
+    public Visitor getVisitor(){
      return visitor; 
      }
-    public void setVisitor(Visitor visitor) {
+    public void setVisitor(Visitor visitor){
      this.visitor = visitor; 
      }
 
-    public Host getHost() {
+    public Host getHost(){
          return host; 
          }
-    public void setHost(Host host) {
+    public void setHost(Host host){
          this.host = host;
           }
 
-    public LocalDate getAppointmentDate() {
+    public LocalDate getAppointmentDate(){
          return appointmentDate; 
     }
     public void setAppointmentDate(LocalDate appointmentDate){ 
         this.appointmentDate = appointmentDate; 
         }
 
-    public String getPurpose() {
+    public String getPurpose(){
          return purpose; 
     }
-    public void setPurpose(String purpose) {
+    public void setPurpose(String purpose){
          this.purpose = purpose; 
     }
 
-    public String getStatus() {
+    public String getStatus(){
          return status; 
     }
     public void setStatus(String status){

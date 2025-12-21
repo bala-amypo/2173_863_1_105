@@ -31,7 +31,7 @@ public class AlertNotification {
         sentAt = LocalDateTime.now();
     }
 
-    public AlertNotification() {}
+    public AlertNotification(){}
 
     public AlertNotification(VisitLog visitLog, String sentTo, String alertMessage) {
         this.visitLog = visitLog;
@@ -39,38 +39,38 @@ public class AlertNotification {
         this.alertMessage = alertMessage;
     }
 
-    public Long getId() { 
+    public Long getId(){ 
         return id; 
     }
-    public void setId(Long id) {
+    public void setId(Long id){
      this.id = id; 
      }
 
-    public VisitLog getVisitLog() { 
+    public VisitLog getVisitLog(){ 
     return visitLog; 
     }
-    public void setVisitLog(VisitLog visitLog) { 
+    public void setVisitLog(VisitLog visitLog){ 
         this.visitLog = visitLog; 
     }
 
-    public String getSentTo() {
+    public String getSentTo(){
          return sentTo; 
     }
-    public void setSentTo(String sentTo) {
+    public void setSentTo(String sentTo){
          this.sentTo = sentTo; 
     }
 
-    public String getAlertMessage() {
+    public String getAlertMessage(){
          return alertMessage; 
     }
     public void setAlertMessage(String alertMessage){
          this.alertMessage = alertMessage; 
     }
 
-    public LocalDateTime getSentAt() {
+    public LocalDateTime getSentAt(){
      return sentAt; 
      }
-    public void setSentAt(LocalDateTime sentAt) {
+    public void setSentAt(LocalDateTime sentAt){
          this.sentAt = sentAt; 
          }
 }
