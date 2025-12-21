@@ -24,8 +24,8 @@ public class VisitLogController {
     @PostMapping("/checkin/{visitorId}/{hostId}")
     @Operation(summary = "Check in visitor")
     public ResponseEntity<VisitLog> checkInVisitor(@PathVariable Long visitorId, 
-                                                    @PathVariable Long hostId,
-                                                    @RequestBody Map<String, String> request) {
+        @PathVariable Long hostId,
+    @RequestBody Map<String, String> request) {
         String purpose = request.get("purpose");
         VisitLog visitLog = visitLogService.checkInVisitor(visitorId, hostId, purpose);
         return ResponseEntity.status(HttpStatus.CREATED).body(visitLog);

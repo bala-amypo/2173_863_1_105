@@ -23,8 +23,8 @@ public class AppointmentController {
     @PostMapping("/{visitorId}/{hostId}")
     @Operation(summary = "Create a new appointment")
     public ResponseEntity<Appointment> createAppointment(@PathVariable Long visitorId, 
-                                                       @PathVariable Long hostId,
-                                                       @RequestBody Appointment appointment) {
+        @PathVariable Long hostId,
+        @RequestBody Appointment appointment) {
         Appointment createdAppointment = appointmentService.createAppointment(visitorId, hostId, appointment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAppointment);
     }
