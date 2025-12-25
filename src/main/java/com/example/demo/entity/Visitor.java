@@ -17,7 +17,8 @@ public class Visitor {
     private LocalDateTime createdAt;
     
     public Visitor() {}
-
+    
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
