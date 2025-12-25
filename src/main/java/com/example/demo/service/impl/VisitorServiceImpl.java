@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-   @Service
-   public class VisitorServiceImpl implements VisitorService {
+@Service
+public class VisitorServiceImpl implements VisitorService {
     private final VisitorRepository visitorRepository;
     
     public VisitorServiceImpl(VisitorRepository visitorRepository) {
@@ -16,7 +16,7 @@ import java.util.List;
     }
     
     @Override
-    public Visitor registerVisitor(Visitor visitor) {
+    public Visitor createVisitor(Visitor visitor) {
         visitor.setCreatedAt(LocalDateTime.now());
         return visitorRepository.save(visitor);
     }
