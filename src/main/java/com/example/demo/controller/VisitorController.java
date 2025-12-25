@@ -17,7 +17,7 @@ public class VisitorController {
     
     @PostMapping
     public ResponseEntity<Visitor> createVisitor(@RequestBody Visitor visitor) {
-        Visitor created = visitorService.registerVisitor(visitor);
+        Visitor created = visitorService.getVisitor(visitor.getId());
         return ResponseEntity.ok(created);
     }
     
