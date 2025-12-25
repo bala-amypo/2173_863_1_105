@@ -15,18 +15,13 @@ public class VisitorServiceImpl implements VisitorService {
         this.visitorRepository = visitorRepository;
     }
     
-
-    public Visitor createVisitor(Visitor visitor) {
+    @Override
+    public Visitor registerVisitor(Visitor visitor) {
         visitor.setCreatedAt(LocalDateTime.now());
         return visitorRepository.save(visitor);
     }
     
-    @Override
-    public Visitor registerVisitor(Visitor visitor) {
-        return createVisitor(visitor);
-    }
-    
-
+    // READ
     @Override
     public Visitor getVisitor(Long id) {
         return visitorRepository.findById(id)
@@ -38,7 +33,6 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorRepository.findAll();
     }
     
-
     public Visitor updateVisitor(Long id, Visitor visitorDetails) {
         Visitor visitor = getVisitor(id);
         visitor.setFullName(visitorDetails.getFullName());
@@ -48,7 +42,7 @@ public class VisitorServiceImpl implements VisitorService {
         return visitorRepository.save(visitor);
     }
     
-
+    // DELETE
     public void deleteVisitor(Long id) {
         Visitor visitor = getVisitor(id);
         visitorRepository.delete(visitor);
