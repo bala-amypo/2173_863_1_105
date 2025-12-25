@@ -3,10 +3,12 @@ package com.example.demo.repository;
 import com.example.demo.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     List<Appointment> findByHostId(Long hostId);
     List<Appointment> findByVisitorId(Long visitorId);
+    List<Appointment> findByAppointmentDate(LocalDate date);
 }
