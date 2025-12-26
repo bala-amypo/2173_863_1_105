@@ -1,45 +1,25 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "appointments")
 public class Appointment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "visitor_id", nullable = false)
+    @ManyToOne
     private Visitor visitor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "host_id", nullable = false)
+    @ManyToOne
     private Host host;
 
-    @NotNull
-    @Column(nullable = false)
     private LocalDate appointmentDate;
-
     private String purpose;
+    private String status;
 
-    @Column(nullable = false)
-    private String status = "SCHEDULED";
-
-    // Constructors
-    public Appointment() {}
-
-    public Appointment(Visitor visitor, Host host, LocalDate appointmentDate, String purpose) {
-        this.visitor = visitor;
-        this.host = host;
-        this.appointmentDate = appointmentDate;
-        this.purpose = purpose;
-        this.status = "SCHEDULED";
-    }
-
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
