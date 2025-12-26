@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class AlertNotification {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "visit_log_id", nullable = false)
+    @JsonIgnore
     private VisitLog visitLog;
 
     @NotBlank

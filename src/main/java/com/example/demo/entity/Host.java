@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -36,9 +37,11 @@ public class Host {
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "host", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Appointment> appointments;
 
     @OneToMany(mappedBy = "host", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<VisitLog> visitLogs;
 
     @PrePersist
