@@ -45,6 +45,23 @@ public class Visitor {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
     }
+     
+     @Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable()) // disable CSRF for POST
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/visitors/**").permitAll()
+                .anyRequest().authenticated()
+            );
+
+        return http.build();
+    }
+}
 
     // Constructors
     public Visitor() {}
