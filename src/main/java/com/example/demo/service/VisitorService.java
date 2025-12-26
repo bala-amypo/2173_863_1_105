@@ -1,14 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.VisitorDTO;
-
+import com.example.demo.entity.Visitor;
 import java.util.List;
 
 public interface VisitorService {
-
-    VisitorDTO createVisitor(VisitorDTO visitorDTO);
-    VisitorDTO getVisitorById(Long id);
-    List<VisitorDTO> getAllVisitors();
-    VisitorDTO updateVisitor(Long id, VisitorDTO visitorDTO);
-    void deleteVisitor(Long id);
+    Visitor createVisitor(Visitor visitor);
+    Visitor getVisitor(Long id);
+    List<Visitor> getAllVisitors();
 }
