@@ -1,16 +1,23 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.VisitorDTO;
+import com.example.demo.dto.ApiResponse;
+import com.example.demo.entity.Visitor;
 import com.example.demo.service.VisitorService;
-import org.springframework.http.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/visitors")
+@Tag(name = "Visitors", description = "Visitor management endpoints")
+@SecurityRequirement(name = "Bearer Authentication")
 public class VisitorController {
-
+    
     private final VisitorService visitorService;
 
     public VisitorController(VisitorService visitorService) {
@@ -18,30 +25,26 @@ public class VisitorController {
     }
 
     @PostMapping
-    public ResponseEntity<VisitorDTO> create(@RequestBody VisitorDTO dto) {
-        return new ResponseEntity<>(visitorService.createVisitor(dto), HttpStatus.CREATED);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<VisitorDTO> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(visitorService.getVisitorById(id));
+    @Operation(summary = "Create a new visitor")
+    public ResponseEntity<ApiResponse<Visitor>> createVisitor(@Valid @RequestBody Visitor visitor) {
+        Visitor createdVisitor = visitorService.createVisitor(visitor);
+        ApiResponse<Visitor> response = new ApiResponse<>(true, "Visitor created successfully", createdVisitor);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<VisitorDTO>> getAll() {
-        return ResponseEntity.ok(visitorService.getAllVisitors());
+    @Operation(summary = "Get all visitors")
+    public ResponseEntity<ApiResponse<List<Visitor>>> getAllVisitors() {
+        List<Visitor> visitors = visitorService.getAllVisitors();
+        ApiResponse<List<Visitor>> response = new ApiResponse<>(true, "Visitors retrieved successfully", visitors);
+        return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<VisitorDTO> update(
-            @PathVariable Long id,
-            @RequestBody VisitorDTO dto) {
-        return ResponseEntity.ok(visitorService.updateVisitor(id, dto));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        visitorService.deleteVisitor(id);
-        return ResponseEntity.ok("Visitor deleted successfully");
+    @GetMapping("/{id}")
+    @Operation(summary = "Get visitor by ID")
+    public ResponseEntity<ApiResponse<Visitor>> getVisitor(@PathVariable Long id) {
+        Visitor visitor = visitorService.getVisitor(id);
+        ApiResponse<Visitor> response = new ApiResponse<>(true, "Visitor retrieved successfully", visitor);
+        return ResponseEntity.ok(response);
     }
 }
