@@ -1,22 +1,14 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.ApiResponse;
 import com.example.demo.model.VisitLog;
 import com.example.demo.service.VisitLogService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/visits")
-@Tag(name = "Visit Logs", description = "Check-in and check-out operations")
-@SecurityRequirement(name = "Bearer Authentication")
 public class VisitLogController {
-    
+
     private final VisitLogService visitLogService;
 
     public VisitLogController(VisitLogService visitLogService) {
@@ -24,37 +16,26 @@ public class VisitLogController {
     }
 
     @PostMapping("/checkin/{visitorId}/{hostId}")
-    @Operation(summary = "Check in a visitor")
-    public ResponseEntity<ApiResponse<VisitLog>> checkInVisitor(
+    public VisitLog checkIn(
             @PathVariable Long visitorId,
             @PathVariable Long hostId,
-            @RequestBody String purpose) {
-        VisitLog visitLog = visitLogService.checkInVisitor(visitorId, hostId, purpose);
-        ApiResponse<VisitLog> response = new ApiResponse<>(true, "Visitor checked in successfully", visitLog);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+            @RequestParam String purpose) {
+
+        return visitLogService.checkInVisitor(visitorId, hostId, purpose);
     }
 
     @PostMapping("/checkout/{visitLogId}")
-    @Operation(summary = "Check out a visitor")
-    public ResponseEntity<ApiResponse<VisitLog>> checkOutVisitor(@PathVariable Long visitLogId) {
-        VisitLog visitLog = visitLogService.checkOutVisitor(visitLogId);
-        ApiResponse<VisitLog> response = new ApiResponse<>(true, "Visitor checked out successfully", visitLog);
-        return ResponseEntity.ok(response);
+    public VisitLog checkOut(@PathVariable Long visitLogId) {
+        return visitLogService.checkOutVisitor(visitLogId);
     }
 
     @GetMapping("/active")
-    @Operation(summary = "Get all active visits")
-    public ResponseEntity<ApiResponse<List<VisitLog>>> getActiveVisits() {
-        List<VisitLog> activeVisits = visitLogService.getActiveVisits();
-        ApiResponse<List<VisitLog>> response = new ApiResponse<>(true, "Active visits retrieved successfully", activeVisits);
-        return ResponseEntity.ok(response);
+    public List<VisitLog> active() {
+        return visitLogService.getActiveVisits();
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get visit log by ID")
-    public ResponseEntity<ApiResponse<VisitLog>> getVisitLog(@PathVariable Long id) {
-        VisitLog visitLog = visitLogService.getVisitLog(id);
-        ApiResponse<VisitLog> response = new ApiResponse<>(true, "Visit log retrieved successfully", visitLog);
-        return ResponseEntity.ok(response);
+    public VisitLog get(@PathVariable Long id) {
+        return visitLogService.getVisitLog(id);
     }
 }
