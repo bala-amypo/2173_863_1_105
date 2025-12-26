@@ -1,50 +1,81 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.VisitorDTO;
 import com.example.demo.entity.Visitor;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.VisitorRepository;
 import com.example.demo.service.VisitorService;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VisitorServiceImpl implements VisitorService {
+
     private final VisitorRepository visitorRepository;
-    
+
     public VisitorServiceImpl(VisitorRepository visitorRepository) {
         this.visitorRepository = visitorRepository;
     }
-    
+
+    private VisitorDTO mapToDTO(Visitor visitor) {
+        return new VisitorDTO(
+                visitor.getId(),
+                visitor.getFullName(),
+                visitor.getPhone(),
+                visitor.getEmail(),
+                visitor.getIdProofNumber()
+        );
+    }
+
+    private Visitor mapToEntity(VisitorDTO dto) {
+        Visitor visitor = new Visitor();
+        visitor.setFullName(dto.getFullName());
+        visitor.setPhone(dto.getPhone());
+        visitor.setEmail(dto.getEmail());
+        visitor.setIdProofNumber(dto.getIdProofNumber());
+        return visitor;
+    }
+
     @Override
-    public Visitor createVisitor(Visitor visitor) {
-        visitor.setCreatedAt(LocalDateTime.now());
-        return visitorRepository.save(visitor);
+    public VisitorDTO createVisitor(VisitorDTO visitorDTO) {
+        Visitor visitor = mapToEntity(visitorDTO);
+        return mapToDTO(visitorRepository.save(visitor));
     }
-    
-    // READ
+
     @Override
-    public Visitor getVisitor(Long id) {
-        return visitorRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Visitor not found"));
+    public VisitorDTO getVisitorById(Long id) {
+        Visitor visitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
+        return mapToDTO(visitor);
     }
-    
+
     @Override
-    public List<Visitor> getAllVisitors() {
-        return visitorRepository.findAll();
+    public List<VisitorDTO> getAllVisitors() {
+        return visitorRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
-    
-    public Visitor updateVisitor(Long id, Visitor visitorDetails) {
-        Visitor visitor = getVisitor(id);
-        visitor.setFullName(visitorDetails.getFullName());
-        visitor.setEmail(visitorDetails.getEmail());
-        visitor.setPhone(visitorDetails.getPhone());
-        visitor.setIdProofNumber(visitorDetails.getIdProofNumber());
-        return visitorRepository.save(visitor);
+
+    @Override
+    public VisitorDTO updateVisitor(Long id, VisitorDTO visitorDTO) {
+        Visitor visitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
+
+        visitor.setFullName(visitorDTO.getFullName());
+        visitor.setPhone(visitorDTO.getPhone());
+        visitor.setEmail(visitorDTO.getEmail());
+        visitor.setIdProofNumber(visitorDTO.getIdProofNumber());
+
+        return mapToDTO(visitorRepository.save(visitor));
     }
-    
-    // DELETE
+
+    @Override
     public void deleteVisitor(Long id) {
-        Visitor visitor = getVisitor(id);
+        Visitor visitor = visitorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitor not found"));
         visitorRepository.delete(visitor);
     }
 }
